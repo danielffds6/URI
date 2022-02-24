@@ -7,44 +7,30 @@ int main(){
     int diaInicial, horaInicial, minutosInicial, segundosInicial;
     int diaFinal, horaFinal, minutosFinal, segundosFinal;
     int diaSaida, horasSaida, minutosSaida, segundosSaida;
-    int restoHoras = 0;
-    int restoMinutos = 0;
-    int restoSegundos = 0;
 
     cin >> dia >> diaInicial;
     cin >> horaInicial >> ponto >> minutosInicial >> ponto >> segundosInicial;
     cin >> dia >> diaFinal;
     cin >> horaFinal >> ponto >> minutosFinal >> ponto >> segundosFinal;
 
-    if(horaInicial > horaFinal){
-        restoHoras = 1;
-    }else if(horaInicial == horaFinal && minutosInicial > minutosFinal){
-        restoMinutos = 1;
-        restoHoras = 1;
-    }else if(horaInicial == horaFinal && minutosInicial == minutosFinal && segundosInicial > segundosFinal){
-        restoSegundos = 1;
-        restoHoras = 1;
-        restoMinutos = 1;
+    segundosSaida = segundosFinal - segundosInicial;
+    minutosSaida = minutosFinal - minutosInicial;
+    horasSaida = horaFinal - horaInicial;
+    diaSaida = diaFinal - diaInicial;
+
+    if(segundosSaida < 0){
+        segundosSaida += 60;
+        minutosSaida--;
     }
 
-    diaSaida = diaFinal - diaInicial - restoHoras;
-
-    if(restoHoras == 1){
-        horasSaida = 24 - horaInicial + horaFinal - restoMinutos;
-    }else{
-        horasSaida = horaFinal - horaInicial;
+    if(minutosSaida < 0){
+        minutosSaida += 60;
+        horasSaida--;
     }
 
-    if(restoMinutos == 1){
-        minutosSaida = 60 - minutosInicial + minutosFinal - restoSegundos;
-    }else{
-        minutosSaida = minutosFinal - minutosInicial;
-    }
-
-    if(segundosInicial > segundosFinal){
-        segundosSaida = 60 - segundosInicial + segundosFinal;
-    }else{
-        segundosSaida = segundosFinal - segundosInicial;
+    if(horasSaida < 0){
+        horasSaida += 24;
+        diaSaida--;
     }
 
     cout << diaSaida << " dia(s)" << endl;
